@@ -160,10 +160,12 @@ class AutoSegmentationWidget(QtWidgets.QWidget):
     def _settings_file(self):
         return os.path.join(self._location, 'settings.json')
 
-    def _write_point_cloud(self):
+    def _create_location(self):
         if not os.path.exists(self._location):
             os.makedirs(self._location)
 
+    def _write_point_cloud(self):
+        self._create_location()
         self._model.get_output_region().writeFile(self.get_output_filename())
 
     def _transform_exported_mesh_to_exf(self):
@@ -189,9 +191,6 @@ class AutoSegmentationWidget(QtWidgets.QWidget):
         os.remove(inputs_stl)
 
     def _export_segmentation_graphics(self):
-        if not os.path.exists(self._location):
-            os.makedirs(self._location)
-
         self._transform_contours_to_mesh()
         self._transform_exported_mesh_to_exf()
 
@@ -201,6 +200,7 @@ class AutoSegmentationWidget(QtWidgets.QWidget):
         scene = self._model.get_root_scene()
         scene_filter = self._model.get_context().getScenefiltermodule().getDefaultScenefilter()
         alt_scene_exporter = STLExporter(self._location)
+        self._create_location()
         alt_scene_exporter.export_stl_from_scene(scene, scene_filter)
         self._reinstate_graphics()
 
