@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'autosegmentationwidget.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.5.2
+## Created by: Qt User Interface Compiler version 6.5.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -27,7 +27,7 @@ class Ui_AutoSegmentationWidget(object):
     def setupUi(self, AutoSegmentationWidget):
         if not AutoSegmentationWidget.objectName():
             AutoSegmentationWidget.setObjectName(u"AutoSegmentationWidget")
-        AutoSegmentationWidget.resize(820, 781)
+        AutoSegmentationWidget.resize(820, 878)
         self.verticalLayout = QVBoxLayout(AutoSegmentationWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.groupBox = QGroupBox(AutoSegmentationWidget)
@@ -50,7 +50,7 @@ class Ui_AutoSegmentationWidget(object):
         self.verticalLayout_5 = QVBoxLayout()
         self.verticalLayout_5.setSpacing(6)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.verticalLayout_5.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
+        self.verticalLayout_5.setSizeConstraint(QLayout.SetDefaultConstraint)
         self.verticalLayout_5.setContentsMargins(10, -1, 10, -1)
         self.label = QLabel(self.groupBox)
         self.label.setObjectName(u"label")
@@ -61,7 +61,6 @@ class Ui_AutoSegmentationWidget(object):
         self.label.setSizePolicy(sizePolicy1)
         self.label.setMinimumSize(QSize(80, 26))
         self.label.setMaximumSize(QSize(80, 26))
-        self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label.setWordWrap(True)
 
         self.verticalLayout_5.addWidget(self.label)
@@ -69,9 +68,8 @@ class Ui_AutoSegmentationWidget(object):
         self.isoValueSlider = QSlider(self.groupBox)
         self.isoValueSlider.setObjectName(u"isoValueSlider")
         self.isoValueSlider.setMaximum(99)
-        self.isoValueSlider.setOrientation(Qt.Orientation.Vertical)
 
-        self.verticalLayout_5.addWidget(self.isoValueSlider, 0, Qt.AlignmentFlag.AlignHCenter)
+        self.verticalLayout_5.addWidget(self.isoValueSlider)
 
         self.isoValueLineEdit = QLineEdit(self.groupBox)
         self.isoValueLineEdit.setObjectName(u"isoValueLineEdit")
@@ -97,7 +95,6 @@ class Ui_AutoSegmentationWidget(object):
         self.label_2.setSizePolicy(sizePolicy2)
         self.label_2.setMinimumSize(QSize(100, 26))
         self.label_2.setMaximumSize(QSize(100, 26))
-        self.label_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_2.setWordWrap(True)
 
         self.verticalLayout_4.addWidget(self.label_2)
@@ -105,9 +102,8 @@ class Ui_AutoSegmentationWidget(object):
         self.segmentationValueSlider = QSlider(self.groupBox)
         self.segmentationValueSlider.setObjectName(u"segmentationValueSlider")
         self.segmentationValueSlider.setMaximum(10000)
-        self.segmentationValueSlider.setOrientation(Qt.Orientation.Vertical)
 
-        self.verticalLayout_4.addWidget(self.segmentationValueSlider, 0, Qt.AlignmentFlag.AlignHCenter)
+        self.verticalLayout_4.addWidget(self.segmentationValueSlider)
 
         self.segmentationValueLineEdit = QLineEdit(self.groupBox)
         self.segmentationValueLineEdit.setObjectName(u"segmentationValueLineEdit")
@@ -124,38 +120,6 @@ class Ui_AutoSegmentationWidget(object):
 
 
         self.verticalLayout_3.addLayout(self.horizontalLayout_2)
-
-        self.groupBoxImage = QGroupBox(self.groupBox)
-        self.groupBoxImage.setObjectName(u"groupBoxImage")
-        self.formLayout_2 = QFormLayout(self.groupBoxImage)
-        self.formLayout_2.setObjectName(u"formLayout_2")
-        self.label_7 = QLabel(self.groupBoxImage)
-        self.label_7.setObjectName(u"label_7")
-
-        self.formLayout_2.setWidget(0, QFormLayout.LabelRole, self.label_7)
-
-        self.imagePixelOutputLabel = QLabel(self.groupBoxImage)
-        self.imagePixelOutputLabel.setObjectName(u"imagePixelOutputLabel")
-
-        self.formLayout_2.setWidget(0, QFormLayout.FieldRole, self.imagePixelOutputLabel)
-
-        self.overrideScalingCheckBox = QCheckBox(self.groupBoxImage)
-        self.overrideScalingCheckBox.setObjectName(u"overrideScalingCheckBox")
-
-        self.formLayout_2.setWidget(2, QFormLayout.FieldRole, self.overrideScalingCheckBox)
-
-        self.scalingLineEdit = QLineEdit(self.groupBoxImage)
-        self.scalingLineEdit.setObjectName(u"scalingLineEdit")
-
-        self.formLayout_2.setWidget(3, QFormLayout.FieldRole, self.scalingLineEdit)
-
-        self.label_6 = QLabel(self.groupBoxImage)
-        self.label_6.setObjectName(u"label_6")
-
-        self.formLayout_2.setWidget(3, QFormLayout.LabelRole, self.label_6)
-
-
-        self.verticalLayout_3.addWidget(self.groupBoxImage)
 
         self.groupBoxSegmentation = QGroupBox(self.groupBox)
         self.groupBoxSegmentation.setObjectName(u"groupBoxSegmentation")
@@ -364,11 +328,6 @@ class Ui_AutoSegmentationWidget(object):
         self.groupBox.setTitle(QCoreApplication.translate("AutoSegmentationWidget", u"Auto Segmentation Viewer", None))
         self.label.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Image Plane Level", None))
         self.label_2.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Segmentation Contour Threshold", None))
-        self.groupBoxImage.setTitle(QCoreApplication.translate("AutoSegmentationWidget", u"Image", None))
-        self.label_7.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Dimensions:", None))
-        self.imagePixelOutputLabel.setText(QCoreApplication.translate("AutoSegmentationWidget", u"AxBxC px", None))
-        self.overrideScalingCheckBox.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Override pre-dertermined scaling", None))
-        self.label_6.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Scaling:", None))
         self.groupBoxSegmentation.setTitle(QCoreApplication.translate("AutoSegmentationWidget", u"Segmentation", None))
 #if QT_CONFIG(tooltip)
         self.allowHighTessellationsCheckBox.setToolTip(QCoreApplication.translate("AutoSegmentationWidget", u"High tessellations are turned off by default because it may take the contour\n"

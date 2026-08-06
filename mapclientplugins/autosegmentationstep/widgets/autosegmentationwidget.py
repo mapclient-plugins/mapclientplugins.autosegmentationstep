@@ -20,6 +20,7 @@ from cmlibs.utils.zinc.mesh import find_connected_mesh_elements_0d
 from cmlibs.widgets.handlers.scenemanipulation import SceneManipulation
 from cmlibs.widgets.handlers.orientation import Orientation
 from cmlibs.widgets.handlers.fixedaxistranslation import FixedAxisTranslation
+from cmlibs.widgets.imagestackwidget import ImageStackWidget
 
 from mapclientplugins.autosegmentationstep.model.autosegmentationmodel import AutoSegmentationModel
 from mapclientplugins.autosegmentationstep.scene.autosegmentationscene import AutoSegmentationScene
@@ -69,9 +70,8 @@ class AutoSegmentationWidget(QtWidgets.QWidget):
         self._view.register_handler(normal_handler)
 
         self._setup_tessellation_line_edit()
-        self._set_scale_validator()
-        display_dimensions = ", ".join([f"{d}" for d in self._model.get_dimensions()])
-        self._ui.imagePixelOutputLabel.setText(f"{display_dimensions} px")
+        self._image_stack_widget = ImageStackWidget(self._model.get_dimensions())
+        self._ui.verticalLayout_3.insertWidget(1, self._image_stack_widget)
 
         self._make_connections()
         self._ui.comboBoxConnectedSurfaces.setEnabled(self._ui.checkBoxToggleDetection.isChecked())
@@ -83,7 +83,6 @@ class AutoSegmentationWidget(QtWidgets.QWidget):
         self._ui.segmentationValueSlider.valueChanged.connect(self._set_line_edit_value)
         self._ui.tessellationDivisionsLineEdit.editingFinished.connect(self._update_tessellation)
         self._ui.pointSizeLineEdit.editingFinished.connect(self._update_point_size)
-        self._ui.scalingLineEdit.editingFinished.connect(self._update_scale)
         self._ui.allowHighTessellationsCheckBox.stateChanged.connect(self._set_tessellation_validator)
         self._ui.imagePlaneCheckBox.stateChanged.connect(self._scene.set_image_plane_visibility)
         self._ui.segmentationCheckBox.stateChanged.connect(self._scene.set_segmentation_visibility)
@@ -99,6 +98,7 @@ class AutoSegmentationWidget(QtWidgets.QWidget):
         self._ui.doneButton.clicked.connect(self._done_execution)
         self._ui.comboBoxConnectedSurfaces.currentIndexChanged.connect(self._connected_subgroup_changed)
         self._ui.checkBoxTargetSpecificValue.stateChanged.connect(self._target_specific_value_changed)
+        self._image_stack_widget.scale_updated.connect(self._update_scale)
 
     def register_done_execution(self, done_execution):
         self._callback = done_execution
@@ -251,8 +251,8 @@ class AutoSegmentationWidget(QtWidgets.QWidget):
         self._ui.outlineCheckBox.setChecked(settings.get("outline", True))
         self._ui.segmentationAlphaDoubleSpinBox.setValue(settings.get("alpha", 1.0))
         self._ui.allowHighTessellationsCheckBox.setChecked(settings.get("tessellation-override", False))
-        self._ui.overrideScalingCheckBox.setChecked(settings.get("scaling-override", False))
-        self._ui.scalingLineEdit.setText(settings.get("scaling", "1, 1, 1"))
+        self._image_stack_widget.override_scaling(settings.get("scaling-override", False))
+        self._image_stack_widget.set_scaling(settings.get("scaling", "1, 1, 1"))
         self._ui.segmentationMeshAlphaDoubleSpinBox.setValue(settings.get("mesh-alpha", 1.0))
         self._ui.detectionPlaneAlphaDoubleSpinBox.setValue(settings.get("plane-alpha", 1.0))
         self._ui.checkBoxTargetSpecificValue.setChecked(settings.get("target-specific", False))
@@ -271,7 +271,7 @@ class AutoSegmentationWidget(QtWidgets.QWidget):
             self._model.get_output_region().readFile(self.get_output_filename())
 
         self._update_point_size()
-        self._update_scale()
+        self._image_stack_widget.update_scale()
 
     def _save_settings(self):
         if not os.path.exists(self._location):
@@ -288,8 +288,8 @@ class AutoSegmentationWidget(QtWidgets.QWidget):
             "tessellation": self._ui.tessellationDivisionsLineEdit.text(),
             "alpha": self._ui.segmentationAlphaDoubleSpinBox.value(),
             "tessellation-override": self._ui.allowHighTessellationsCheckBox.isChecked(),
-            "scaling-override": self._ui.overrideScalingCheckBox.isChecked(),
-            "scaling": self._ui.scalingLineEdit.text(),
+            "scaling-override": self._image_stack_widget.scaling_overridden(),
+            "scaling": self._image_stack_widget.get_scaling(),
             "point-density": self._ui.pointDensityLineEdit.text(),
             "point-size": self._ui.pointSizeLineEdit.text(),
             "mesh-alpha": self._ui.segmentationMeshAlphaDoubleSpinBox.value(),
@@ -325,10 +325,6 @@ class AutoSegmentationWidget(QtWidgets.QWidget):
 
         self._set_tessellation_validator()
 
-    def _set_scale_validator(self):
-        regex = QtCore.QRegularExpression("^[0-9.]+((, ?[0-9.]+){2})?$")
-        _set_vector_validator(self._ui.scalingLineEdit, regex)
-
     def _set_tessellation_validator(self):
         size = 5 if self._ui.allowHighTessellationsCheckBox else 3
         regex = QtCore.QRegularExpression(f"^[0-9]{{1,{size}}}((, ?[0-9]{{1,{size}}}){{2}})?$")
@@ -350,12 +346,9 @@ class AutoSegmentationWidget(QtWidgets.QWidget):
         if size:
             self._scene.set_point_size(float(size))
 
-    def _update_scale(self):
-        text = self._ui.scalingLineEdit.text()
-        if text:
-            scale = [float(x.strip()) for x in text.split(',')]
-            self._model.set_scale(scale)
-            self._scene.update_scale()
+    def _update_scale(self, scale):
+        self._model.set_scale(scale)
+        self._scene.update_scale()
 
     def _generate_points(self):
         self._scene.set_image_plane_visibility(0)
