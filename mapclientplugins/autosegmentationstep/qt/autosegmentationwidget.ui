@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>820</width>
-    <height>646</height>
+    <height>781</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,7 +33,7 @@
           <item>
            <spacer name="horizontalSpacer_2">
             <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+             <enum>Qt::Orientation::Horizontal</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
@@ -49,7 +49,7 @@
              <number>6</number>
             </property>
             <property name="sizeConstraint">
-             <enum>QLayout::SetDefaultConstraint</enum>
+             <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
             </property>
             <property name="leftMargin">
              <number>10</number>
@@ -81,20 +81,20 @@
                <string>Image Plane Level</string>
               </property>
               <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <set>Qt::AlignmentFlag::AlignCenter</set>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
               </property>
              </widget>
             </item>
-            <item alignment="Qt::AlignHCenter">
+            <item alignment="Qt::AlignmentFlag::AlignHCenter">
              <widget class="QSlider" name="isoValueSlider">
               <property name="maximum">
                <number>99</number>
               </property>
               <property name="orientation">
-               <enum>Qt::Vertical</enum>
+               <enum>Qt::Orientation::Vertical</enum>
               </property>
              </widget>
             </item>
@@ -110,7 +110,7 @@
           <item>
            <spacer name="horizontalSpacer_3">
             <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+             <enum>Qt::Orientation::Horizontal</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
@@ -146,20 +146,20 @@
                <string>Segmentation Contour Threshold</string>
               </property>
               <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <set>Qt::AlignmentFlag::AlignCenter</set>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
               </property>
              </widget>
             </item>
-            <item alignment="Qt::AlignHCenter">
+            <item alignment="Qt::AlignmentFlag::AlignHCenter">
              <widget class="QSlider" name="segmentationValueSlider">
               <property name="maximum">
                <number>10000</number>
               </property>
               <property name="orientation">
-               <enum>Qt::Vertical</enum>
+               <enum>Qt::Orientation::Vertical</enum>
               </property>
              </widget>
             </item>
@@ -175,7 +175,7 @@
           <item>
            <spacer name="horizontalSpacer_5">
             <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+             <enum>Qt::Orientation::Horizontal</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
@@ -233,14 +233,73 @@
            <string>Segmentation</string>
           </property>
           <layout class="QFormLayout" name="formLayout">
-           <item row="0" column="0">
+           <item row="3" column="1">
+            <widget class="QCheckBox" name="allowHighTessellationsCheckBox">
+             <property name="toolTip">
+              <string>High tessellations are turned off by default because it may take the contour
+calcuation en exceedingly long time to be calcuated.</string>
+             </property>
+             <property name="text">
+              <string>Allow high tessellations</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>Tessellation Divisions:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QLineEdit" name="tessellationDivisionsLineEdit">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>Point Density:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QLineEdit" name="pointDensityLineEdit"/>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="label_8">
+             <property name="text">
+              <string>Point Size:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QLineEdit" name="pointSizeLineEdit"/>
+           </item>
+           <item row="0" column="1">
+            <widget class="QCheckBox" name="checkBoxTargetSpecificValue">
+             <property name="toolTip">
+              <string>When dealing with discrete values in the data, this option
+ can be used to target single values within the data.
+The segmentation contour will have to be very close
+ to the targetted value for the segmentation
+ at that value to result in anything visible.</string>
+             </property>
+             <property name="text">
+              <string>Target specific value</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
             <widget class="QLabel" name="label_3">
              <property name="text">
               <string>Contour Alpha:</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
+           <item row="5" column="1">
             <widget class="QDoubleSpinBox" name="segmentationAlphaDoubleSpinBox">
              <property name="decimals">
               <number>3</number>
@@ -255,50 +314,6 @@
               <double>1.000000000000000</double>
              </property>
             </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QCheckBox" name="allowHighTessellationsCheckBox">
-             <property name="toolTip">
-              <string>High tessellations are turned off by default because it may take the contour calcuation en exceedingly long time</string>
-             </property>
-             <property name="text">
-              <string>Allow high tessellations</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string>Tessellation Divisions:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLineEdit" name="tessellationDivisionsLineEdit">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_5">
-             <property name="text">
-              <string>Point Density:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QLineEdit" name="pointDensityLineEdit"/>
-           </item>
-           <item row="4" column="0">
-            <widget class="QLabel" name="label_8">
-             <property name="text">
-              <string>Point Size:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="QLineEdit" name="pointSizeLineEdit"/>
            </item>
           </layout>
          </widget>
@@ -352,12 +367,97 @@
           </layout>
          </widget>
         </item>
+        <item>
+         <widget class="QGroupBox" name="groupBoxDetectionPlane">
+          <property name="title">
+           <string>Detection Mode</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout">
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_9">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Plane Alpha:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="checkBoxReverseField">
+             <property name="text">
+              <string>Reverse Visibility Field</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QDoubleSpinBox" name="segmentationMeshAlphaDoubleSpinBox">
+             <property name="decimals">
+              <number>3</number>
+             </property>
+             <property name="maximum">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.010000000000000</double>
+             </property>
+             <property name="value">
+              <double>1.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QDoubleSpinBox" name="detectionPlaneAlphaDoubleSpinBox">
+             <property name="decimals">
+              <number>3</number>
+             </property>
+             <property name="maximum">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.010000000000000</double>
+             </property>
+             <property name="value">
+              <double>1.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>Mesh Alpha:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="checkBoxToggleDetection">
+             <property name="text">
+              <string>Toggle On</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_11">
+             <property name="text">
+              <string>Connected Surfaces:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QComboBox" name="comboBoxConnectedSurfaces"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>
        <spacer name="horizontalSpacer_4">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -399,7 +499,7 @@
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>

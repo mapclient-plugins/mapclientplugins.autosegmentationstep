@@ -1,0 +1,7 @@
+PySide6
+cmlibs.exporter
+cmlibs.importer
+cmlibs.maths
+cmlibs.utils >= 0.6.1
+cmlibs.widgets
+cmlibs.zinc

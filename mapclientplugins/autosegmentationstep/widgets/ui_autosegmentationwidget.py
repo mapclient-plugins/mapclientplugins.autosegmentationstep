@@ -15,10 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QDoubleSpinBox, QFormLayout,
-    QGroupBox, QHBoxLayout, QLabel, QLayout,
-    QLineEdit, QPushButton, QSizePolicy, QSlider,
-    QSpacerItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QDoubleSpinBox,
+    QFormLayout, QGridLayout, QGroupBox, QHBoxLayout,
+    QLabel, QLayout, QLineEdit, QPushButton,
+    QSizePolicy, QSlider, QSpacerItem, QVBoxLayout,
+    QWidget)
 
 from mapclientplugins.autosegmentationstep.widgets.zincautosegmentationwidget import ZincAutoSegmentationWidget
 
@@ -26,7 +27,7 @@ class Ui_AutoSegmentationWidget(object):
     def setupUi(self, AutoSegmentationWidget):
         if not AutoSegmentationWidget.objectName():
             AutoSegmentationWidget.setObjectName(u"AutoSegmentationWidget")
-        AutoSegmentationWidget.resize(820, 646)
+        AutoSegmentationWidget.resize(820, 781)
         self.verticalLayout = QVBoxLayout(AutoSegmentationWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.groupBox = QGroupBox(AutoSegmentationWidget)
@@ -49,7 +50,7 @@ class Ui_AutoSegmentationWidget(object):
         self.verticalLayout_5 = QVBoxLayout()
         self.verticalLayout_5.setSpacing(6)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.verticalLayout_5.setSizeConstraint(QLayout.SetDefaultConstraint)
+        self.verticalLayout_5.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
         self.verticalLayout_5.setContentsMargins(10, -1, 10, -1)
         self.label = QLabel(self.groupBox)
         self.label.setObjectName(u"label")
@@ -60,7 +61,7 @@ class Ui_AutoSegmentationWidget(object):
         self.label.setSizePolicy(sizePolicy1)
         self.label.setMinimumSize(QSize(80, 26))
         self.label.setMaximumSize(QSize(80, 26))
-        self.label.setAlignment(Qt.AlignCenter)
+        self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label.setWordWrap(True)
 
         self.verticalLayout_5.addWidget(self.label)
@@ -68,9 +69,9 @@ class Ui_AutoSegmentationWidget(object):
         self.isoValueSlider = QSlider(self.groupBox)
         self.isoValueSlider.setObjectName(u"isoValueSlider")
         self.isoValueSlider.setMaximum(99)
-        self.isoValueSlider.setOrientation(Qt.Vertical)
+        self.isoValueSlider.setOrientation(Qt.Orientation.Vertical)
 
-        self.verticalLayout_5.addWidget(self.isoValueSlider, 0, Qt.AlignHCenter)
+        self.verticalLayout_5.addWidget(self.isoValueSlider, 0, Qt.AlignmentFlag.AlignHCenter)
 
         self.isoValueLineEdit = QLineEdit(self.groupBox)
         self.isoValueLineEdit.setObjectName(u"isoValueLineEdit")
@@ -96,7 +97,7 @@ class Ui_AutoSegmentationWidget(object):
         self.label_2.setSizePolicy(sizePolicy2)
         self.label_2.setMinimumSize(QSize(100, 26))
         self.label_2.setMaximumSize(QSize(100, 26))
-        self.label_2.setAlignment(Qt.AlignCenter)
+        self.label_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_2.setWordWrap(True)
 
         self.verticalLayout_4.addWidget(self.label_2)
@@ -104,9 +105,9 @@ class Ui_AutoSegmentationWidget(object):
         self.segmentationValueSlider = QSlider(self.groupBox)
         self.segmentationValueSlider.setObjectName(u"segmentationValueSlider")
         self.segmentationValueSlider.setMaximum(10000)
-        self.segmentationValueSlider.setOrientation(Qt.Vertical)
+        self.segmentationValueSlider.setOrientation(Qt.Orientation.Vertical)
 
-        self.verticalLayout_4.addWidget(self.segmentationValueSlider, 0, Qt.AlignHCenter)
+        self.verticalLayout_4.addWidget(self.segmentationValueSlider, 0, Qt.AlignmentFlag.AlignHCenter)
 
         self.segmentationValueLineEdit = QLineEdit(self.groupBox)
         self.segmentationValueLineEdit.setObjectName(u"segmentationValueLineEdit")
@@ -160,10 +161,50 @@ class Ui_AutoSegmentationWidget(object):
         self.groupBoxSegmentation.setObjectName(u"groupBoxSegmentation")
         self.formLayout = QFormLayout(self.groupBoxSegmentation)
         self.formLayout.setObjectName(u"formLayout")
+        self.allowHighTessellationsCheckBox = QCheckBox(self.groupBoxSegmentation)
+        self.allowHighTessellationsCheckBox.setObjectName(u"allowHighTessellationsCheckBox")
+
+        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.allowHighTessellationsCheckBox)
+
+        self.label_4 = QLabel(self.groupBoxSegmentation)
+        self.label_4.setObjectName(u"label_4")
+
+        self.formLayout.setWidget(4, QFormLayout.LabelRole, self.label_4)
+
+        self.tessellationDivisionsLineEdit = QLineEdit(self.groupBoxSegmentation)
+        self.tessellationDivisionsLineEdit.setObjectName(u"tessellationDivisionsLineEdit")
+
+        self.formLayout.setWidget(4, QFormLayout.FieldRole, self.tessellationDivisionsLineEdit)
+
+        self.label_5 = QLabel(self.groupBoxSegmentation)
+        self.label_5.setObjectName(u"label_5")
+
+        self.formLayout.setWidget(6, QFormLayout.LabelRole, self.label_5)
+
+        self.pointDensityLineEdit = QLineEdit(self.groupBoxSegmentation)
+        self.pointDensityLineEdit.setObjectName(u"pointDensityLineEdit")
+
+        self.formLayout.setWidget(6, QFormLayout.FieldRole, self.pointDensityLineEdit)
+
+        self.label_8 = QLabel(self.groupBoxSegmentation)
+        self.label_8.setObjectName(u"label_8")
+
+        self.formLayout.setWidget(7, QFormLayout.LabelRole, self.label_8)
+
+        self.pointSizeLineEdit = QLineEdit(self.groupBoxSegmentation)
+        self.pointSizeLineEdit.setObjectName(u"pointSizeLineEdit")
+
+        self.formLayout.setWidget(7, QFormLayout.FieldRole, self.pointSizeLineEdit)
+
+        self.checkBoxTargetSpecificValue = QCheckBox(self.groupBoxSegmentation)
+        self.checkBoxTargetSpecificValue.setObjectName(u"checkBoxTargetSpecificValue")
+
+        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.checkBoxTargetSpecificValue)
+
         self.label_3 = QLabel(self.groupBoxSegmentation)
         self.label_3.setObjectName(u"label_3")
 
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label_3)
+        self.formLayout.setWidget(5, QFormLayout.LabelRole, self.label_3)
 
         self.segmentationAlphaDoubleSpinBox = QDoubleSpinBox(self.groupBoxSegmentation)
         self.segmentationAlphaDoubleSpinBox.setObjectName(u"segmentationAlphaDoubleSpinBox")
@@ -172,42 +213,7 @@ class Ui_AutoSegmentationWidget(object):
         self.segmentationAlphaDoubleSpinBox.setSingleStep(0.010000000000000)
         self.segmentationAlphaDoubleSpinBox.setValue(1.000000000000000)
 
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.segmentationAlphaDoubleSpinBox)
-
-        self.allowHighTessellationsCheckBox = QCheckBox(self.groupBoxSegmentation)
-        self.allowHighTessellationsCheckBox.setObjectName(u"allowHighTessellationsCheckBox")
-
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.allowHighTessellationsCheckBox)
-
-        self.label_4 = QLabel(self.groupBoxSegmentation)
-        self.label_4.setObjectName(u"label_4")
-
-        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_4)
-
-        self.tessellationDivisionsLineEdit = QLineEdit(self.groupBoxSegmentation)
-        self.tessellationDivisionsLineEdit.setObjectName(u"tessellationDivisionsLineEdit")
-
-        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.tessellationDivisionsLineEdit)
-
-        self.label_5 = QLabel(self.groupBoxSegmentation)
-        self.label_5.setObjectName(u"label_5")
-
-        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.label_5)
-
-        self.pointDensityLineEdit = QLineEdit(self.groupBoxSegmentation)
-        self.pointDensityLineEdit.setObjectName(u"pointDensityLineEdit")
-
-        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.pointDensityLineEdit)
-
-        self.label_8 = QLabel(self.groupBoxSegmentation)
-        self.label_8.setObjectName(u"label_8")
-
-        self.formLayout.setWidget(4, QFormLayout.LabelRole, self.label_8)
-
-        self.pointSizeLineEdit = QLineEdit(self.groupBoxSegmentation)
-        self.pointSizeLineEdit.setObjectName(u"pointSizeLineEdit")
-
-        self.formLayout.setWidget(4, QFormLayout.FieldRole, self.pointSizeLineEdit)
+        self.formLayout.setWidget(5, QFormLayout.FieldRole, self.segmentationAlphaDoubleSpinBox)
 
 
         self.verticalLayout_3.addWidget(self.groupBoxSegmentation)
@@ -243,6 +249,66 @@ class Ui_AutoSegmentationWidget(object):
 
         self.verticalLayout_3.addWidget(self.groupBoxVisibility)
 
+        self.groupBoxDetectionPlane = QGroupBox(self.groupBox)
+        self.groupBoxDetectionPlane.setObjectName(u"groupBoxDetectionPlane")
+        self.gridLayout = QGridLayout(self.groupBoxDetectionPlane)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.label_9 = QLabel(self.groupBoxDetectionPlane)
+        self.label_9.setObjectName(u"label_9")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.label_9.sizePolicy().hasHeightForWidth())
+        self.label_9.setSizePolicy(sizePolicy3)
+
+        self.gridLayout.addWidget(self.label_9, 4, 0, 1, 1)
+
+        self.checkBoxReverseField = QCheckBox(self.groupBoxDetectionPlane)
+        self.checkBoxReverseField.setObjectName(u"checkBoxReverseField")
+
+        self.gridLayout.addWidget(self.checkBoxReverseField, 1, 0, 1, 1)
+
+        self.segmentationMeshAlphaDoubleSpinBox = QDoubleSpinBox(self.groupBoxDetectionPlane)
+        self.segmentationMeshAlphaDoubleSpinBox.setObjectName(u"segmentationMeshAlphaDoubleSpinBox")
+        self.segmentationMeshAlphaDoubleSpinBox.setDecimals(3)
+        self.segmentationMeshAlphaDoubleSpinBox.setMaximum(1.000000000000000)
+        self.segmentationMeshAlphaDoubleSpinBox.setSingleStep(0.010000000000000)
+        self.segmentationMeshAlphaDoubleSpinBox.setValue(1.000000000000000)
+
+        self.gridLayout.addWidget(self.segmentationMeshAlphaDoubleSpinBox, 3, 1, 1, 1)
+
+        self.detectionPlaneAlphaDoubleSpinBox = QDoubleSpinBox(self.groupBoxDetectionPlane)
+        self.detectionPlaneAlphaDoubleSpinBox.setObjectName(u"detectionPlaneAlphaDoubleSpinBox")
+        self.detectionPlaneAlphaDoubleSpinBox.setDecimals(3)
+        self.detectionPlaneAlphaDoubleSpinBox.setMaximum(1.000000000000000)
+        self.detectionPlaneAlphaDoubleSpinBox.setSingleStep(0.010000000000000)
+        self.detectionPlaneAlphaDoubleSpinBox.setValue(1.000000000000000)
+
+        self.gridLayout.addWidget(self.detectionPlaneAlphaDoubleSpinBox, 4, 1, 1, 1)
+
+        self.label_10 = QLabel(self.groupBoxDetectionPlane)
+        self.label_10.setObjectName(u"label_10")
+
+        self.gridLayout.addWidget(self.label_10, 3, 0, 1, 1)
+
+        self.checkBoxToggleDetection = QCheckBox(self.groupBoxDetectionPlane)
+        self.checkBoxToggleDetection.setObjectName(u"checkBoxToggleDetection")
+
+        self.gridLayout.addWidget(self.checkBoxToggleDetection, 0, 0, 1, 1)
+
+        self.label_11 = QLabel(self.groupBoxDetectionPlane)
+        self.label_11.setObjectName(u"label_11")
+
+        self.gridLayout.addWidget(self.label_11, 2, 0, 1, 1)
+
+        self.comboBoxConnectedSurfaces = QComboBox(self.groupBoxDetectionPlane)
+        self.comboBoxConnectedSurfaces.setObjectName(u"comboBoxConnectedSurfaces")
+
+        self.gridLayout.addWidget(self.comboBoxConnectedSurfaces, 2, 1, 1, 1)
+
+
+        self.verticalLayout_3.addWidget(self.groupBoxDetectionPlane)
+
 
         self.horizontalLayout_3.addLayout(self.verticalLayout_3)
 
@@ -252,11 +318,11 @@ class Ui_AutoSegmentationWidget(object):
 
         self.zincWidget = ZincAutoSegmentationWidget(self.groupBox)
         self.zincWidget.setObjectName(u"zincWidget")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        sizePolicy3.setHorizontalStretch(1)
-        sizePolicy3.setVerticalStretch(1)
-        sizePolicy3.setHeightForWidth(self.zincWidget.sizePolicy().hasHeightForWidth())
-        self.zincWidget.setSizePolicy(sizePolicy3)
+        sizePolicy4 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy4.setHorizontalStretch(1)
+        sizePolicy4.setVerticalStretch(1)
+        sizePolicy4.setHeightForWidth(self.zincWidget.sizePolicy().hasHeightForWidth())
+        self.zincWidget.setSizePolicy(sizePolicy4)
 
         self.horizontalLayout_3.addWidget(self.zincWidget)
 
@@ -304,20 +370,35 @@ class Ui_AutoSegmentationWidget(object):
         self.overrideScalingCheckBox.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Override pre-dertermined scaling", None))
         self.label_6.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Scaling:", None))
         self.groupBoxSegmentation.setTitle(QCoreApplication.translate("AutoSegmentationWidget", u"Segmentation", None))
-        self.label_3.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Contour Alpha:", None))
 #if QT_CONFIG(tooltip)
-        self.allowHighTessellationsCheckBox.setToolTip(QCoreApplication.translate("AutoSegmentationWidget", u"High tessellations are turned off by default because it may take the contour calcuation en exceedingly long time", None))
+        self.allowHighTessellationsCheckBox.setToolTip(QCoreApplication.translate("AutoSegmentationWidget", u"High tessellations are turned off by default because it may take the contour\n"
+"calcuation en exceedingly long time to be calcuated.", None))
 #endif // QT_CONFIG(tooltip)
         self.allowHighTessellationsCheckBox.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Allow high tessellations", None))
         self.label_4.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Tessellation Divisions:", None))
         self.tessellationDivisionsLineEdit.setText("")
         self.label_5.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Point Density:", None))
         self.label_8.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Point Size:", None))
+#if QT_CONFIG(tooltip)
+        self.checkBoxTargetSpecificValue.setToolTip(QCoreApplication.translate("AutoSegmentationWidget", u"When dealing with discrete values in the data, this option\n"
+" can be used to target single values within the data.\n"
+"The segmentation contour will have to be very close\n"
+" to the targetted value for the segmentation\n"
+" at that value to result in anything visible.", None))
+#endif // QT_CONFIG(tooltip)
+        self.checkBoxTargetSpecificValue.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Target specific value", None))
+        self.label_3.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Contour Alpha:", None))
         self.groupBoxVisibility.setTitle(QCoreApplication.translate("AutoSegmentationWidget", u"Visibility", None))
         self.imagePlaneCheckBox.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Image Plane", None))
         self.segmentationCheckBox.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Segmentation", None))
         self.pointCloudCheckBox.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Point Cloud", None))
         self.outlineCheckBox.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Outline", None))
+        self.groupBoxDetectionPlane.setTitle(QCoreApplication.translate("AutoSegmentationWidget", u"Detection Mode", None))
+        self.label_9.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Plane Alpha:", None))
+        self.checkBoxReverseField.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Reverse Visibility Field", None))
+        self.label_10.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Mesh Alpha:", None))
+        self.checkBoxToggleDetection.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Toggle On", None))
+        self.label_11.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Connected Surfaces:", None))
         self.generatePointsButton.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Generate Points", None))
         self.histogramPushButton.setText(QCoreApplication.translate("AutoSegmentationWidget", u"Show Histogram", None))
         self.doneButton.setText(QCoreApplication.translate("AutoSegmentationWidget", u"&Done", None))
