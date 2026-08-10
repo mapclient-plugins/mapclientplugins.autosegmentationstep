@@ -144,7 +144,7 @@ class AutoSegmentationModel(object):
         for image_name in self._input_image_data.image_files():
             stream_information.createStreamresourceFile(image_name)
 
-        image_field.read(stream_information)
+        print('read result:', image_field.read(stream_information))
 
         return image_field
 
